@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            .a {
+                position: fixed;
+                top: 0;
+                left: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="div">
+            <p>wangEditor 扩展 —— sound code</p>
+        </div>
+        <script src="../node_modules/wangeditor/dist/wangEditor.min.js"></script>
+        <script src="../dist/soundCode.min.js"></script>
+        <script>
+            const editor = new wangEditor('#div')
+
+            // 注册扩展菜单
+            soundCode(editor)
+
+            editor.config.height = 800
+            editor.create()
+        </script>
+    </body>
+</html>

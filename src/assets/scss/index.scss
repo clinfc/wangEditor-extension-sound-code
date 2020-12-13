@@ -1,0 +1,29 @@
+.w-e-toolbar {
+    .w-e-list {
+        padding: 7px 10px;
+        .exit-monaco {
+            padding: 2px;
+            text-align: left;
+        }
+    }
+}
+.w-e-text-container {
+    .sound-code {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: #ffffff;
+        &.hide {
+            z-index: -1;
+            opacity: 0;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            background-color: #eeeeee;
+            border: none;
+        }
+    }
+}
