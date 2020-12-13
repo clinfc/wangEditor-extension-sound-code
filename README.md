@@ -1,4 +1,4 @@
-# wangEdtor-soundCode
+# wangEditor-extension-sound-code
 
 > wangEditor 扩展菜单 - 源码编辑
 
