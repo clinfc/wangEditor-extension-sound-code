@@ -3,8 +3,6 @@
  * @deprecated wangEditor 自定义扩展菜单（编辑区源码编辑功能）
  */
 
-import '~/assets/scss/index.scss'
-import '~/assets/icomoon/index.css'
 import SoundCode from './sound-code/'
 
 /**
@@ -17,5 +15,9 @@ export default function soundCode(editor) {
     if (editor.config.menus.indexOf(key) == -1) {
         editor.menus.extend(key, SoundCode)
         editor.config.menus.push(key)
+        // Monaco Editor 加载超时
+        editor.config.soundCodeTimeout = 5000
+        // Monaco Editor 配置项
+        editor.config.soundCodeOption = {}
     }
 }

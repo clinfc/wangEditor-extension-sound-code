@@ -7,7 +7,6 @@ import tpl from './tpl.js'
 
 export default function (menu) {
     const { container, editor } = menu
-    const iframe = container.find('iframe').elems[0]
 
     const controller = {}
 
@@ -17,41 +16,39 @@ export default function (menu) {
      * 开启源码编辑模式
      */
     controller.open = function () {
-        if (!monacoInstance) {
-            iframe.contentDocument.write(tpl())
+        let iframe = container.find('iframe').elems[0]
+        let timeout = editor.config.soundCodeTimeout || 5000
+        let now = Date.now()
 
-            let timeout = editor.config.soundCodeTimeout || 10000
-            let now = Date.now()
+        iframe.contentDocument.write(tpl(editor.config.soundCodeOption))
 
-            let timer = setInterval(() => {
-                if (iframe.contentWindow.monacoInstance) {
-                    clearInterval(timer)
+        let timer = setInterval(() => {
+            if (iframe.contentWindow.monacoInstance) {
+                clearInterval(timer)
 
-                    monacoInstance = iframe.contentWindow.monacoInstance
+                monacoInstance = iframe.contentWindow.monacoInstance
 
-                    controller.open = function () {
-                        // 取消菜单激活（drop list click 事件冒泡导致放在此处）
-                        if (menu.isActive) {
-                            menu.unActive()
-                            return
-                        }
-                        // Monaco editor 赋值
-                        monacoInstance.setValue(editor.$textElem.html())
-                        // 显示 Monaco editor
-                        const zIndex = menu.editor.zIndex.get('tooltip')
-                        container.removeClass('hide').css('z-index', zIndex)
-                        // 菜单激活
-                        menu.active()
+                controller.open = function () {
+                    // 取消菜单激活（drop list click 事件冒泡导致放在此处）
+                    if (menu.isActive) {
+                        menu.unActive()
+                        return
                     }
-                    controller.open()
-                    return
+                    // Monaco editor 赋值
+                    monacoInstance.setValue(editor.$textElem.html())
+                    // 显示 Monaco editor
+                    const zIndex = menu.editor.zIndex.get('tooltip')
+                    container.removeClass('hide').css('z-index', zIndex)
+                    // 菜单激活
+                    menu.active()
                 }
-                if (Date.now() - now > timeout) {
-                    clearInterval(timer)
-                    throw new Error('Monaco Editor 初始化失败')
-                }
-            }, 500)
-        }
+                controller.open()
+                return
+            } else if (Date.now() - now > timeout) {
+                clearInterval(timer)
+                throw new Error('Monaco Editor 初始化失败')
+            }
+        }, 500)
     }
 
     /**
