@@ -7,6 +7,8 @@ const editor = new wangEditor('#div1')
 
 registerExpandMenu(editor)
 
+editor.config.height = 600
+
 editor.create()
 
 window.editor = editor

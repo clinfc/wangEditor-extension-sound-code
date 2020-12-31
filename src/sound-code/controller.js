@@ -3,7 +3,7 @@
  * @deprecated 源码编辑器相关操作的控制器
  */
 
-import tpl from './tpl.js'
+ import { tpl } from './container.js';
 
 export default function (menu) {
     const { container, editor } = menu
@@ -28,6 +28,7 @@ export default function (menu) {
 
                 monacoInstance = iframe.contentWindow.monacoInstance
 
+                // 重写控制器的 open 方法
                 controller.open = function () {
                     // 取消菜单激活（drop list click 事件冒泡导致放在此处）
                     if (menu.isActive) {
@@ -43,6 +44,21 @@ export default function (menu) {
                     menu.active()
                 }
                 controller.open()
+
+                // 绑定快捷键
+                iframe.contentDocument.addEventListener('keydown', e => {
+                    // Esc：退出
+                    if (e.keyCode == 27) {
+                        controller.exit()
+                        menu.unActive()
+                        return
+                    }
+                    // Ctrl + S：保存
+                    if (e.ctrlKey && e.keyCode == 83) {
+                        e.preventDefault()
+                        controller.save()
+                    }
+                })
                 return
             } else if (Date.now() - now > timeout) {
                 clearInterval(timer)
