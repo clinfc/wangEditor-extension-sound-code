@@ -28,7 +28,7 @@
     "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0",
     "url-loader": "^4.1.1",
-    "wangeditor": "^4.5.0",
+    "wangeditor": "^4.6.1",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",

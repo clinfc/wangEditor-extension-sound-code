@@ -15,7 +15,7 @@ const { $, BtnMenu } = wangEditor
 
 export default class SoundCode extends BtnMenu {
     constructor(editor) {
-        const $elem = $(`<div class="w-e-menu"><i class="icon-embed2"></i></div>`)
+        const $elem = $(`<div class="w-e-menu" data-title="源码编辑"><i class="icon-embed2"></i></div>`)
         super($elem, editor)
 
         // 编辑区容器
