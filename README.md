@@ -8,7 +8,7 @@
 
 ## 菜单注册
 
-> version >= 4.6.4
+> wangeditor version >= 4.6.4
 
 ```js
 // 将扩展菜单注册到 wangEditor 中。
@@ -25,7 +25,7 @@ editor.config.soundCodeOption = {}
 editor.create()
 ```
 
-> version < 4.6.4
+> wangeditor version < 4.6.4
 
 ```js
 const editor = new wangEditor('#div')
