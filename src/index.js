@@ -7,17 +7,19 @@ import SoundCode from './sound-code/'
 
 /**
  * 暴露注册函数
- * @param {wangEditor} editor wangEditor 实例
+ * @param {wangEditor} e wangEditor 实例
  */
-export default function soundCode(editor) {
+export default function soundCode(e) {
     const key = 'soundCode'
 
-    if (editor.config.menus.indexOf(key) == -1) {
-        editor.menus.extend(key, SoundCode)
-        editor.config.menus.push(key)
+    if (e.registerMenu) {
+        e.registerMenu(key, SoundCode)
+    } else if (e.config.menus.indexOf(key) == -1) {
+        e.menus.extend(key, SoundCode)
+        e.config.menus.push(key)
         // Monaco Editor 加载超时
-        editor.config.soundCodeTimeout = 5000
+        e.config.soundCodeTimeout = 5000
         // Monaco Editor 配置项
-        editor.config.soundCodeOption = {}
+        e.config.soundCodeOption = {}
     }
 }
