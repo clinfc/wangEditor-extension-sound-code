@@ -3,9 +3,9 @@
  * @deprecated 源码编辑器相关操作的控制器
  */
 
- import { tpl } from './container.js';
+import { tpl } from './container.js';
 
-export default function (menu) {
+export default function(menu) {
     const { container, editor } = menu
 
     const controller = {}
@@ -15,7 +15,7 @@ export default function (menu) {
     /**
      * 开启源码编辑模式
      */
-    controller.open = function () {
+    controller.open = function() {
         let iframe = container.find('iframe').elems[0]
         let timeout = editor.config.soundCodeTimeout || 5000
         let now = Date.now()
@@ -29,18 +29,13 @@ export default function (menu) {
                 monacoInstance = iframe.contentWindow.monacoInstance
 
                 // 重写控制器的 open 方法
-                controller.open = function () {
-                    // 取消菜单激活（drop list click 事件冒泡导致放在此处）
-                    if (menu.isActive) {
-                        menu.unActive()
-                        return
-                    }
+                controller.open = function() {
                     // Monaco editor 赋值
                     monacoInstance.setValue(editor.$textElem.html())
-                    // 显示 Monaco editor
+                        // 显示 Monaco editor
                     const zIndex = menu.editor.zIndex.get('tooltip')
                     container.removeClass('hide').css('z-index', zIndex)
-                    // 菜单激活
+                        // 菜单激活
                     menu.active()
                 }
                 controller.open()
@@ -70,16 +65,17 @@ export default function (menu) {
     /**
      * 保存 Monaco editor 数据
      */
-    controller.save = function () {
+    controller.save = function() {
         editor.$textElem.html(monacoInstance.getValue())
     }
 
     /**
      * 退出源码编辑模式
      */
-    controller.exit = function () {
+    controller.exit = function() {
         monacoInstance.setValue('')
         container.addClass('hide').css('z-index', -1)
+        menu.unActive()
     }
 
     return controller

@@ -6,6 +6,9 @@
 
 目前本扩展未发布 npm，需要拿取 `dist/soundCode.min.js` 放在自己的项目中使用。
 
+> 如果你在使用本扩展时无法退出源码模式，请转到 noStopPropagation 分支下获取 `dist/soundCode.min.js` 文件。
+> 因本人未找到 droplist 是在哪个版本执行了 `e.stopPropagation()`，无法给与版本参考。
+
 ## 菜单注册
 
 > wangeditor version >= 4.6.4
